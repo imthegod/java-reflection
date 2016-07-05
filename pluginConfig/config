@@ -1,0 +1,45 @@
+{
+  "configs": [{
+    "name": ["parameter1","parameter1","parameter1"],
+    "api": "http://api.snapdeal.com/key/{api_key}/id/{id}",
+    "request_class": "thirdparty.RequestBuilderImpl",
+    "Request_Method": "buildRequest",
+    "Parser_Class": "thirdparty.ParserImpl",
+    "Parser_Method": "parseRequest"
+  }, {
+    "name": ["parameter1","parameter1","parameter1"],
+    "api": "http://api.snapdeal.com/key/{api_key}/id/{id}",
+    "request_class": "thirdparty.RequestBuilderImpl",
+    "Request_Method": "buildRequest",
+    "Parser_Class": "thirdparty.ParserImpl",
+    "Parser_Method": "parseRequest"
+  }, {
+    "name": ["parameter1","parameter1","parameter1"],
+    "api": "http://api.snapdeal.com/key/{api_key}/id/{id}",
+    "request_class": "thirdparty.RequestBuilderImpl",
+    "Request_Method": "buildRequest",
+    "Parser_Class": "thirdparty.ParserImpl",
+    "Parser_Method": "parseRequest"
+  }, {
+    "name": ["parameter1","parameter1","parameter1"],
+    "api": "http://api.snapdeal.com/key/{api_key}/id/{id}",
+    "request_class": "thirdparty.RequestBuilderImpl",
+    "Request_Method": "buildRequest",
+    "Parser_Class": "thirdparty.ParserImpl",
+    "Parser_Method": "parseRequest"
+  }, {
+    "name": ["parameter1","parameter1","parameter1"],
+    "api": "http://api.snapdeal.com/key/{api_key}/id/{id}",
+    "request_class": "thirdparty.RequestBuilderImpl",
+    "Request_Method": "buildRequest",
+    "Parser_Class": "thirdparty.ParserImpl",
+    "Parser_Method": "parseRequest"
+  }, {
+    "name": ["parameter1","parameter1","parameter1"],
+    "api": "http://api.snapdeal.com/key/{api_key}/id/{id}",
+    "request_class": "thirdparty.RequestBuilderImpl",
+    "Request_Method": "buildRequest",
+    "Parser_Class": "thirdparty.ParserImpl",
+    "Parser_Method": "parseRequest"
+  }]
+}

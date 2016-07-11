@@ -72,6 +72,12 @@
             <version>20160212</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.snaq</groupId>
+            <artifactId>dbpool</artifactId>
+            <version>7.0</version>
+        </dependency>
+
 
 
     </dependencies>

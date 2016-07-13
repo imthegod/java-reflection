@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by pardhamavilla on 4/7/16.
  */
-public class Config {
+public class APIConfig {
 
     @JsonProperty("name")
     private List<String> name;
@@ -28,10 +28,10 @@ public class Config {
     @JsonProperty("Parser_Method")
     private String parserMethod;
 
-    public Config() {
+    public APIConfig() {
     }
 
-    public Config(List<String> name, String api, String requestClass, String requestMethod, String parserClass, String parserMethod) {
+    public APIConfig(List<String> name, String api, String requestClass, String requestMethod, String parserClass, String parserMethod) {
         this.name = name;
         this.api = api;
         this.requestClass = requestClass;

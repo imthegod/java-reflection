@@ -43,7 +43,7 @@ public class DBConnection {
             int minPool = 1; // Minimum number of pooled connections, or 0 for none.
             int maxPool = 3; // Maximum number of pooled connections, or 0 for none.
             int maxSize = 10; // Maximum number of possible connections, or 0 for no limit.
-            idleTimeout = 30; // Idle timeout (seconds) for idle pooled connections, or 0 for no timeout.
+            idleTimeout = 300; // Idle timeout (seconds) for idle pooled connections, or 0 for no timeout.
             String url = dbConfig.getUrl(); // JDBC connection URL.
             String username = dbConfig.getUsername(); // Database username.
             String password = dbConfig.getPassword(); // Password for the database username supplied.
@@ -60,7 +60,7 @@ public class DBConnection {
      */
     public static DBConnection getInstance(DBConfig dbConfig) {
         if (dbSingleton == null) {
-            dbSingleton = new DBConnection(dbConfig);
+            init(dbConfig);
         }
         return dbSingleton;
     }
@@ -69,8 +69,10 @@ public class DBConnection {
      * A private Constructor prevents any other class from instantiating.
      */
 
-    public void init(DBConfig dbConfig) {
-
+    public static void init(DBConfig dbConfig) {
+        if (dbSingleton == null) {
+            dbSingleton = new DBConnection(dbConfig);
+        }
     }
 
     public Connection openConnection() {

@@ -1,5 +1,6 @@
 package util;
 
+import base.DBConfig;
 import snaq.db.ConnectionPool;
 
 import java.sql.Connection;
@@ -16,10 +17,7 @@ public class DBConnection {
     private long idleTimeout;
     private boolean flag = true; //true: connection open, false: bad or no connection
 
-    /**
-     * A private Constructor prevents any other class from instantiating.
-     */
-    private DBConnection() {
+    private DBConnection(DBConfig dbConfig) {
         Class<?> c = null;
         try {
             c = Class.forName("com.mysql.jdbc.Driver");
@@ -46,9 +44,9 @@ public class DBConnection {
             int maxPool = 3; // Maximum number of pooled connections, or 0 for none.
             int maxSize = 10; // Maximum number of possible connections, or 0 for no limit.
             idleTimeout = 30; // Idle timeout (seconds) for idle pooled connections, or 0 for no timeout.
-            String url = "jdbc:mysql://localhost:3309/db"; // JDBC connection URL.
-            String username = "senecaBBB"; // Database username.
-            String password = "db"; // Password for the database username supplied.
+            String url = dbConfig.getUrl(); // JDBC connection URL.
+            String username = dbConfig.getUsername(); // Database username.
+            String password = dbConfig.getPassword(); // Password for the database username supplied.
             try {
                 pool = new ConnectionPool(name, minPool, maxPool, maxSize, idleTimeout, url, username, password);
             } finally {
@@ -60,11 +58,19 @@ public class DBConnection {
     /**
      * Static 'instance' method
      */
-    public static DBConnection getInstance() {
+    public static DBConnection getInstance(DBConfig dbConfig) {
         if (dbSingleton == null) {
-            dbSingleton = new DBConnection();
+            dbSingleton = new DBConnection(dbConfig);
         }
         return dbSingleton;
+    }
+
+    /**
+     * A private Constructor prevents any other class from instantiating.
+     */
+
+    public void init(DBConfig dbConfig) {
+
     }
 
     public Connection openConnection() {

@@ -1,8 +1,7 @@
 package tests;
 
-import base.Config;
+import base.APIConfig;
 import base.Configurations;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import util.ConfigReader;
 
 import java.lang.reflect.InvocationTargetException;
@@ -23,7 +22,7 @@ public class ConfigReaderTest {
         int i =1;
 
         try {
-            for(Config config : configurations.getConfigs()){
+            for (APIConfig config : configurations.getApiConfigs()) {
 
                 Class myClass = Class.forName(config.getRequestClass());
 

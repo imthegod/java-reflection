@@ -1,5 +1,6 @@
 {
-  "configs": [{
+  "apiConfigs": [
+    {
     "name": ["parameter1","parameter1","parameter1"],
     "api": "http://api.snapdeal.com/key/{api_key}/id/{id}",
     "request_class": "thirdparty.RequestBuilderImpl",

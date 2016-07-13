@@ -1,6 +1,6 @@
 package thirdparty;
 
-import base.IParser;
+import interfaces.IParser;
 
 
 /**

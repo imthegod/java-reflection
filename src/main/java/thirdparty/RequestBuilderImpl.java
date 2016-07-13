@@ -1,6 +1,6 @@
 package thirdparty;
 
-import base.IRequestBuilder;
+import interfaces.IRequestBuilder;
 import org.json.JSONObject;
 
 /**

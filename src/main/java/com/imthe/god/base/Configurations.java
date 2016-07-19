@@ -1,11 +1,14 @@
-package base;
+package com.imthe.god.base;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pardhamavilla on 4/7/16.
  */
 public class Configurations {
+
+    private Map<String, String> details;
 
     private List<APIConfig> apiConfigs;
 
@@ -13,18 +16,14 @@ public class Configurations {
 
     private List<LogicConfig> logicConfigs;
 
-    private List<ParameterConfig> parameterConfigs;
-
     public Configurations() {
     }
 
-    public Configurations(List<APIConfig> apiConfigs, List<DBConfig> dbConfigs,
-                          List<LogicConfig> logicConfigs, List<ParameterConfig>
-                                  parameterConfigs) {
+    public Configurations(Map<String, String> details, List<APIConfig> apiConfigs, List<DBConfig> dbConfigs, List<LogicConfig> logicConfigs) {
+        this.details = details;
         this.apiConfigs = apiConfigs;
         this.dbConfigs = dbConfigs;
         this.logicConfigs = logicConfigs;
-        this.parameterConfigs = parameterConfigs;
     }
 
     public List<APIConfig> getApiConfigs() {
@@ -33,6 +32,14 @@ public class Configurations {
 
     public void setApiConfigs(List<APIConfig> apiConfigs) {
         this.apiConfigs = apiConfigs;
+    }
+
+    public Map<String, String> getDetails() {
+        return details;
+    }
+
+    public void setDetails(Map<String, String> details) {
+        this.details = details;
     }
 
     public List<DBConfig> getDbConfigs() {
@@ -51,23 +58,14 @@ public class Configurations {
         this.logicConfigs = logicConfigs;
     }
 
-    public List<ParameterConfig> getParameterConfigs() {
-        return parameterConfigs;
-    }
-
-    public void setParameterConfigs(List<ParameterConfig> parameterConfigs) {
-        this.parameterConfigs = parameterConfigs;
-    }
-
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Configurations{");
-        sb.append("apiConfigs=").append(apiConfigs);
-        sb.append(", dbConfigs=").append(dbConfigs);
-        sb.append(", logicConfigs=").append(logicConfigs);
-        sb.append(", parameterConfigs=").append(parameterConfigs);
-        sb.append('}');
-        return sb.toString();
+        return "Configurations{" +
+                "details=" + details +
+                ", apiConfigs=" + apiConfigs +
+                ", dbConfigs=" + dbConfigs +
+                ", logicConfigs=" + logicConfigs +
+                '}';
     }
 }
 

@@ -1,4 +1,4 @@
-package base;
+package com.imthe.god.base;
 
 /**
  * Created by pardhamavilla on 13/7/16.

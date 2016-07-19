@@ -1,26 +1,24 @@
-package util;
+package com.imthe.god.util;
 
-import base.DBConfig;
+
+import com.imthe.god.base.DBConfig;
 import snaq.db.ConnectionPool;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by pardhamavilla on 11/7/16.
  */
-public class DBConnection {
-    private static DBConnection dbSingleton = null;
+public class DBConnector {
+    private static DBConnector dbSingleton = null;
     private static ConnectionPool pool = null;
+    private static boolean flag = true; //true: connection open, false: bad or no connection
     private long idleTimeout;
-    private boolean flag = true; //true: connection open, false: bad or no connection
 
-    private DBConnection(DBConfig dbConfig) {
+    private DBConnector(DBConfig dbConfig) {
         Class<?> c = null;
         try {
-            c = Class.forName("com.mysql.jdbc.Driver");
+            c = Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             flag = false;
         }
@@ -58,7 +56,7 @@ public class DBConnection {
     /**
      * Static 'instance' method
      */
-    public static DBConnection getInstance(DBConfig dbConfig) {
+    public static DBConnector getInstance(DBConfig dbConfig) {
         if (dbSingleton == null) {
             init(dbConfig);
         }
@@ -71,11 +69,15 @@ public class DBConnection {
 
     public static void init(DBConfig dbConfig) {
         if (dbSingleton == null) {
-            dbSingleton = new DBConnection(dbConfig);
+            dbSingleton = new DBConnector(dbConfig);
         }
     }
 
-    public Connection openConnection() {
+    public static boolean getConnectionStatus() {
+        return flag;
+    }
+
+    private Connection openConnection() {
         Connection conn = null;
         try {
             conn = pool.getConnection(idleTimeout);
@@ -86,7 +88,11 @@ public class DBConnection {
         return conn;
     }
 
-    public boolean getConnectionStatus() {
-        return flag;
+
+    public ResultSet executeStatement(String statement) throws SQLException {
+        Connection connection = openConnection();
+        Statement stmt = connection.createStatement();
+        ResultSet resultset = stmt.executeQuery(statement);
+        return resultset;
     }
 }

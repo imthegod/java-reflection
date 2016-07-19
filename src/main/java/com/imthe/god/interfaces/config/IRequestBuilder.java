@@ -1,4 +1,4 @@
-package interfaces;
+package com.imthe.god.interfaces.config;
 
 import org.json.JSONObject;
 
@@ -7,7 +7,6 @@ import org.json.JSONObject;
  */
 
 public interface IRequestBuilder {
-
 
     JSONObject buildRequest(Integer i);
 }

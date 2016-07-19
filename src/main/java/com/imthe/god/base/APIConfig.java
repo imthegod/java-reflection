@@ -1,4 +1,4 @@
-package base;
+package com.imthe.god.base;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,41 +10,46 @@ import java.util.List;
 public class APIConfig {
 
     @JsonProperty("name")
-    private List<String> name;
+    private String name;
 
     @JsonProperty("api")
     private String api;
 
-
-    @JsonProperty("request_class")
+    @JsonProperty("Request_Class")
     private String requestClass;
 
     @JsonProperty("Request_Method")
     private String requestMethod;
 
     @JsonProperty("Parser_Class")
+
     private String parserClass;
 
     @JsonProperty("Parser_Method")
     private String parserMethod;
 
+    @JsonProperty("parameters")
+    private List<String> parameters;
+
     public APIConfig() {
     }
 
-    public APIConfig(List<String> name, String api, String requestClass, String requestMethod, String parserClass, String parserMethod) {
+    public APIConfig(String name, String api, String requestClass, String requestMethod, String parserClass,
+                     String parserMethod, List<String> parameters) {
         this.name = name;
         this.api = api;
         this.requestClass = requestClass;
         this.requestMethod = requestMethod;
         this.parserClass = parserClass;
         this.parserMethod = parserMethod;
+        this.parameters = parameters;
     }
 
-    public List<String> getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(List<String> name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -88,16 +93,24 @@ public class APIConfig {
         this.parserMethod = parserMethod;
     }
 
+    public List<String> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<String> parameters) {
+        this.parameters = parameters;
+    }
+
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Parameter{");
-        sb.append("name='").append(name).append('\'');
-        sb.append(", api='").append(api).append('\'');
-        sb.append(", requestClass='").append(requestClass).append('\'');
-        sb.append(", requestMethod='").append(requestMethod).append('\'');
-        sb.append(", parserClass='").append(parserClass).append('\'');
-        sb.append(", parserMethod='").append(parserMethod).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "APIConfig{" +
+                "name='" + name + '\'' +
+                ", api='" + api + '\'' +
+                ", requestClass='" + requestClass + '\'' +
+                ", requestMethod='" + requestMethod + '\'' +
+                ", parserClass='" + parserClass + '\'' +
+                ", parserMethod='" + parserMethod + '\'' +
+                ", parameters=" + parameters +
+                '}';
     }
 }

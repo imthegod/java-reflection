@@ -1,7 +1,7 @@
-package util;
+package com.imthe.god.util;
 
-import base.Metadata;
 import com.google.common.base.Strings;
+import com.imthe.god.base.APIMetadata;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -25,20 +25,21 @@ public class HttpClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(HttpClient.class);
 
-    public final HttpResponse executeHttpPostRequest(String request, Metadata metadata, String contentType) throws IOException {
-        HttpPost httpPost = new HttpPost(metadata.getAPI());
-        httpPost.addHeader("Content-Type", contentType);
+    public final HttpResponse executeHttpPostRequest(APIMetadata apiMetadata) throws IOException {
+        HttpPost httpPost = new HttpPost(apiMetadata.getAPI());
+        httpPost.addHeader("Content-Type", apiMetadata.getContentType());
 
-        String userName = metadata.getUserName();
-        String metadataAuthToken = metadata.getAuthToken();
+        String userName = apiMetadata.getUserName();
+        String metadataAuthToken = apiMetadata.getAuthToken();
         boolean isAuthTokenPresent = !Strings.isNullOrEmpty(metadataAuthToken) || !Strings.isNullOrEmpty(userName);
         if (isAuthTokenPresent) {
-            String effectiveAuthToken = metadataAuthToken != null ? metadataAuthToken : "Basic " + new Base64().encodeToString((userName + ":" + metadata.getPassword()).getBytes());
+            String effectiveAuthToken = metadataAuthToken != null ? metadataAuthToken : "Basic "
+                    + new Base64().encodeToString((userName + ":" + apiMetadata.getPassword()).getBytes());
             httpPost.addHeader("Authorization", effectiveAuthToken);
         }
 
         // add extra parameters in headers
-        Map<String, String> extraHeaderParameters = metadata.getHeaderParameters();
+        Map<String, String> extraHeaderParameters = apiMetadata.getHeaderParameters();
         if (extraHeaderParameters != null && !extraHeaderParameters.isEmpty()) {
             for (String headerKey : extraHeaderParameters.keySet()) {
                 String headerValue = extraHeaderParameters.get(headerKey);
@@ -46,12 +47,12 @@ public class HttpClient {
             }
         }
 
-        if (!Strings.isNullOrEmpty(metadata.getParameterName())) {
+        if (!Strings.isNullOrEmpty(apiMetadata.getParameterName())) {
             List<NameValuePair> nameValuePairs = new ArrayList();
-            nameValuePairs.add(new BasicNameValuePair(metadata.getParameterName(), request));
+            nameValuePairs.add(new BasicNameValuePair(apiMetadata.getParameterName(), apiMetadata.getRequest()));
 
             // add extra parameters in request or payload
-            Map<String, String> requestParameters = metadata.getRequestParameters();
+            Map<String, String> requestParameters = apiMetadata.getRequestParameters();
             if (requestParameters != null) {
                 for (String key : requestParameters.keySet()) {
                     nameValuePairs.add(new BasicNameValuePair(key, requestParameters.get(key)));
@@ -59,7 +60,7 @@ public class HttpClient {
             }
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
         } else {
-            StringEntity params = new StringEntity(request);
+            StringEntity params = new StringEntity(apiMetadata.getRequest());
             httpPost.setEntity(params);
         }
 

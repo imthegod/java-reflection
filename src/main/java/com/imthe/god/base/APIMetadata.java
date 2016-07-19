@@ -1,4 +1,4 @@
-package base;
+package com.imthe.god.base;
 
 
 import java.util.HashMap;
@@ -7,7 +7,8 @@ import java.util.Map;
 /**
  *
  */
-public class Metadata {
+public class APIMetadata {
+
     private String API;
 
     private String userName;
@@ -18,19 +19,26 @@ public class Metadata {
 
     private Integer batchSize;
 
+    private String request;
+
+    private String contentType;
+
     private String parameterName;
 
     private Map<String, String> requestParameters = new HashMap();
 
     private Map<String, String> headerParameters = new HashMap();
 
-    public Metadata(String API, String userName, String password, String parameterName, int batchSize, String authToken, Map<String, String> requestParameters, Map<String, String> headerParameters) {
+    public APIMetadata(String API, String userName, String password, String authToken, Integer batchSize, String request,
+                       String contentType, String parameterName, Map<String, String> requestParameters, Map<String, String> headerParameters) {
         this.API = API;
         this.userName = userName;
         this.password = password;
-        this.parameterName = parameterName;
-        this.batchSize = batchSize;
         this.authToken = authToken;
+        this.batchSize = batchSize;
+        this.request = request;
+        this.contentType = contentType;
+        this.parameterName = parameterName;
         this.requestParameters = requestParameters;
         this.headerParameters = headerParameters;
     }
@@ -97,6 +105,38 @@ public class Metadata {
 
     public void setHeaderParameters(Map<String, String> headerParameters) {
         this.headerParameters = headerParameters;
+    }
+
+    public String getRequest() {
+        return request;
+    }
+
+    public void setRequest(String request) {
+        this.request = request;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    @Override
+    public String toString() {
+        return "APIMetadata{" +
+                "API='" + API + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", authToken='" + authToken + '\'' +
+                ", batchSize=" + batchSize +
+                ", request='" + request + '\'' +
+                ", contentType='" + contentType + '\'' +
+                ", parameterName='" + parameterName + '\'' +
+                ", requestParameters=" + requestParameters +
+                ", headerParameters=" + headerParameters +
+                '}';
     }
 }
 

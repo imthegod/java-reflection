@@ -1,0 +1,35 @@
+{
+  "details": {
+    "station": "rms",
+    "channel": "snapdeal",
+    "tenant": "jasper"
+  },
+  "apiConfigs": [
+    {
+      "parameters": [
+        "parameter1",
+        "parameter1",
+        "parameter1"
+      ],
+      "api": "http://api.snapdeal.com/key/{api_key}/id/{id}",
+      "Request_Class": "thirdparty.RequestBuilderImpl",
+      "Request_Method": "buildRequest",
+      "Parser_Class": "thirdparty.ParserImpl",
+      "Parser_Method": "parseRequest"
+    }
+  ],
+  "dbConfigs": [
+    {
+      "parameters": [
+        "parameter1",
+        "parameter1",
+        "parameter1"
+      ],
+      "url": "10.41.190.17:3306/QAAS",
+      "username": "dev",
+      "password": "snapdeal",
+      "Parser_Class": "thirdparty.ParserImpl",
+      "Parser_Method": "parseRequest"
+    }
+  ]
+}
